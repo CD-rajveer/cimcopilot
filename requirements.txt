@@ -36,7 +36,6 @@ docx==0.2.4
 effdet==0.4.1
 emoji==2.10.1
 exceptiongroup==1.2.0
-exceptions
 executing==2.0.1
 faiss-cpu==1.8.0
 fastapi==0.110.1

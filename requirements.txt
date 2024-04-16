@@ -10,3 +10,4 @@ unstructured==0.12.4
 fitz
 frontend
 pdf2image
+streamlit_text_rating

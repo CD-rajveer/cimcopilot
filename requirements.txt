@@ -7,3 +7,4 @@ faiss-cpu
 langchain_google_genai
 paho-mqtt
 unstructured==0.12.4
+fitz

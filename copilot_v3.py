@@ -323,7 +323,7 @@ def main():
     st.text("Start your chat")
 
     # Folder path where PDF and DOC files are stored
-    folder_path = "/home/cimcon/Documents/Rajveer Rathod/CIMCopilot/chatwith datasheet/CIMdata"
+    folder_path = "/CIMdata"
 
     # Fetch PDF and DOC files from the folder
     pdf_files, doc_files = fetch_files_from_folder(folder_path)

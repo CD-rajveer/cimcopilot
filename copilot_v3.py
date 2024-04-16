@@ -1,16 +1,8 @@
 # Standard library imports
-import base64
-import datetime
 import os
 import json
-import random
-import re
-import logging
 import pandas as pd
 import requests
-import fitz
-from pdf2image import convert_from_path
-import pytesseract
 from streamlit_text_rating.st_text_rater import st_text_rater
 
 

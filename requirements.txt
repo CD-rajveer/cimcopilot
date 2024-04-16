@@ -11,3 +11,4 @@ fitz
 frontend
 pdf2image
 streamlit_text_rating
+docx

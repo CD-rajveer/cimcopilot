@@ -26,9 +26,9 @@ from langchain.document_loaders import UnstructuredWordDocumentLoader,Docx2txtLo
 from langchain_community.document_loaders import UnstructuredFileLoader
 from langchain_community.utilities import GoogleSerperAPIWrapper
 
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=os.getenv("AIzaSyBxisXJdsQeYdRUUqieef7sM7lCaUduTW0"))
 
-data_path = "/home/cimcon/Documents/Rajveer Rathod/CIMCopilot/chatwith datasheet/CIMdata"
+# data_path = "/home/cimcon/Documents/Rajveer Rathod/CIMCopilot/chatwith datasheet/CIMdata"
 
 loaders = {
     '.pdf': PyMuPDFLoader,

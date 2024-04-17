@@ -26,7 +26,7 @@ from langchain.document_loaders import UnstructuredWordDocumentLoader,Docx2txtLo
 from langchain_community.document_loaders import UnstructuredFileLoader
 from langchain_community.utilities import GoogleSerperAPIWrapper
 
-GOOGLE_API_KEY = "AIzaSyBxisXJdsQeYdRUUqieef7sM7lCaUduTW0"
+GOOGLE_API_KEY = "AIzaSyDL5KKAzI2z7ue7g_s62i4ZgfDw70gnc9A"
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 

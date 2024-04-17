@@ -27,7 +27,7 @@ from langchain_community.document_loaders import UnstructuredFileLoader
 from langchain_community.utilities import GoogleSerperAPIWrapper
 
 # os.environ['GOOGLE_API_KEY'] = "AIzaSyDL5KKAzI2z7ue7g_s62i4ZgfDw70gnc9A"
-os.environ['GOOGLE_API_KEY'] = "AIzaSyCCCuFRHJfRccGtqhH23jH9lrVfl52OP-w"
+os.environ['GOOGLE_API_KEY'] = "AIzaSyDYmei4WbkEX9p_6rF_RaANkl72DgxEIBQ"
 
 genai.configure(api_key = os.environ['GOOGLE_API_KEY'])
 # data_path = "/home/cimcon/Documents/Rajveer Rathod/CIMCopilot/chatwith datasheet/CIMdata"

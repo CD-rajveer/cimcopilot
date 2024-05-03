@@ -11,7 +11,6 @@ from streamlit_text_rating.st_text_rater import st_text_rater
 from streamlit_feedback import streamlit_feedback
 import logging
 import speech_recognition as sr
-from datasheet import datasheet_text
 import tempfile
 
 
@@ -62,11 +61,7 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 os.environ["SERPER_API_KEY"] = SERPER_API_KEY
 
-data_path = "/home/cimcon/Documents/Rajveer Rathod/CIMCopilot/cimcopilot_research/CIMdata"
-
-# CONSTANT_ANALOG_PAYLOAD = """{\n \"ai_config\": {\n        \"publisher\": {\n            \"destination\": [\n                \"service_transport\",\n                \"service_thingsboard\"\n            ],\n            \"sampling_rate\": 60,\n            \"debug\": 0\n        },\n        \"NumOfChannels\": 4,\n        \"aiChannel-1\": {\n            \"Enable\": 1,\n            \"pin-no\": 1,\n            \"ChannelType\": \"I\",\n            \"EnggLowCal\": 4,\n            \"EnggHighCal\": 20,\n            \"Scalelow\": 4,\n            \"Scalehigh\": 20,\n            \"Name\": \"ai1\",\n            \"peripheral_id\": 201\n        }\n    }\n}"""
-
-# analog_string = json.dumps(CONST_ANALOG_PAYLOAD, indent=4, separators=())
+data_path = "./CIMdata"
 
 loaders = {
     ".pdf": PyMuPDFLoader,

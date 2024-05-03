@@ -952,8 +952,8 @@ def main():
         )
 
     with st.sidebar:
-        # image = "/home/cimcon/Documents/Rajveer Rathod/CIMCopilot/cimcopilot_research/images/CIMcopilot Logo-01.png"
-        # st.image(image, use_column_width=True)
+        image = "./images/CIMcopilot Logo-01.png"
+        st.image(image, use_column_width=True)
         toggle_state = st.toggle("Find datasheet online")
         st.title("Upload datasheet")
         pdf_docs = st.file_uploader(

@@ -879,7 +879,7 @@ def main():
     st.text("Start your chat")
 
     # Folder path where PDF and DOC files are stored
-    folder_path = "/home/cimcon/Documents/Rajveer Rathod/CIMCopilot/cimcopilot_research/CIMdata"
+    folder_path = "./CIMdata"
 
     # Fetch PDF and DOC files from the folder
     pdf_files, doc_files = fetch_files_from_folder(folder_path)
@@ -952,8 +952,8 @@ def main():
         )
 
     with st.sidebar:
-        image = "/home/cimcon/Documents/Rajveer Rathod/CIMCopilot/cimcopilot_research/images/CIMcopilot Logo-01.png"
-        st.image(image, use_column_width=True)
+        # image = "/home/cimcon/Documents/Rajveer Rathod/CIMCopilot/cimcopilot_research/images/CIMcopilot Logo-01.png"
+        # st.image(image, use_column_width=True)
         toggle_state = st.toggle("Find datasheet online")
         st.title("Upload datasheet")
         pdf_docs = st.file_uploader(

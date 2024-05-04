@@ -114,7 +114,7 @@ def get_vector_store(text_chunks):
     vector_store = FAISS.from_texts(
         text_chunks, embedding=embeddings
     )
-    vector_store.save_local("faiss_index")
+    vector_store.save_local("cimcopilot_vector_data")
 
 
 ###########################################################################################################
@@ -146,7 +146,7 @@ def get_conversational_chain():
     load_qa_prompt_template = """
 
 You are CIMCopilot created by **CIMCON Digital**.
-greet the user. 
+ 
 As an adept in analyzing technical specifications and configurations for a broad array of edge devices, I'm here to offer precise and detailed information regarding edge device specifications in response to specific queries. My proficiency spans across various manufacturers, encompassing crucial details such as make, model number, power consumption, processing capabilities, connectivity options, input/output interfaces, operating range, and firmware/software support.
 
 Your primary task is to ask me about edge device specifications, and I'll provide you with the relevant information. If the requested data is unavailable directly from the context, I'll respond with "answer is not available in the context." Additionally, I'm equipped to provide information about the CIM10 upon request. For more detailed inquiries, you can contact our support team at support@cimcondigital.com.
@@ -340,7 +340,7 @@ def user_input(user_question):
         google_api_key=google_api_key,
     )
     doc_db = FAISS.load_local(
-        "faiss_index",
+        "cimcopilot_vector_data",
         embeddings,
         allow_dangerous_deserialization=True,
     )

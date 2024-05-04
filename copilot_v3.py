@@ -851,12 +851,7 @@ def main():
         if st.button("Submit & Process"):
             with st.spinner("Processing..."):
                 raw_text = get_pdf_text(pdf_docs)
-                print("raw text", raw_text)
-                print(
-                    "###########################################################################################"
-                )
                 text_chunks = get_text_chunks(raw_text)
-                print("tet chunks: ", text_chunks)
                 get_vector_store(text_chunks)
                 st.success("Done")
         st.write("# Past Chats")

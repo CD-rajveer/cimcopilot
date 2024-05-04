@@ -548,8 +548,8 @@ def parse_pdf():
         # logging.info(f"parsed  pdf")
 
         # Get text chunks
-        # chunks = get_text_chunks(text)
-        # get_vector_store(chunks)
+        chunks = get_text_chunks(datasheet_text)
+        get_vector_store(chunks)
         # logging.info(f"got text chunks: {chunks}")
 
         # Display the text chunks
@@ -563,11 +563,11 @@ def parse_pdf():
 
         # Display message indicating parsing is done
         st.toast("PDF parsing done.")
-        return datasheet_text
+        # return datasheet_text
 
     except Exception as e:
         st.error(f"Error parsing PDF {pdf_name}")
-        return None
+        # return None
     finally:
         # Clean up temporary file
         if temp_file_path:

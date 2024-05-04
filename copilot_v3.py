@@ -61,7 +61,7 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 os.environ["SERPER_API_KEY"] = SERPER_API_KEY
 
-data_path = "./CIMdata"
+# data_path = "./CIMdata"
 
 loaders = {
     ".pdf": PyMuPDFLoader,

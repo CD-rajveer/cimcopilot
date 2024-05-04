@@ -114,7 +114,7 @@ def get_vector_store(text_chunks):
     vector_store = FAISS.from_texts(
         text_chunks, embedding=embeddings
     )
-    vector_store.save_local("cimcopilot_vector_data")
+    vector_store.save_local("faiss_index")
 
 
 ###########################################################################################################
@@ -340,7 +340,7 @@ def user_input(user_question):
         google_api_key=google_api_key,
     )
     doc_db = FAISS.load_local(
-        "cimcopilot_vector_data",
+        "faiss_index",
         embeddings,
         allow_dangerous_deserialization=True,
     )

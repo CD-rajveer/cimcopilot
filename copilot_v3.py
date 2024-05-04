@@ -126,10 +126,10 @@ chat_message_history = ChatMessageHistory()
 def handle_user_input_and_ai_response(user_question, ai_response):
     # Add user's question to the chat history
     chat_message_history.add_user_message(user_question)
-    print(f"User message added: {user_question}")
+   
     # Add AI's response to the chat history
     chat_message_history.add_ai_message(ai_response)
-    print(f"AI message added: {ai_response}")
+   
 
 
 def get_conversational_chain():

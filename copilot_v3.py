@@ -245,6 +245,8 @@ For configuring digital input on the CIM10, there are two pins available, suppor
 | Pin Name            | User-defined                             |
 | Device ID           | User-defined                             |
 
+make sure to ask user relevant follow-up questions.
+
 **You can say "I don't have information about this, Please provide relavent and clear question! or Contact Support Team on this email :- support@cimcondigital.com" unless the question is completely unrelated.*
 remember the conversation in the chat.
 

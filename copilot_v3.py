@@ -10,7 +10,7 @@ import requests
 from streamlit_text_rating.st_text_rater import st_text_rater
 from streamlit_feedback import streamlit_feedback
 import logging
-import speech_recognition as sr
+# import speech_recognition as sr
 import tempfile
 
 
@@ -371,12 +371,16 @@ def user_input(user_question):
         },
         return_only_outputs=True,
     )
-    data = {
+
+    with open("user_question_response.json", "r") as json_file:
+        existing_data = json.load(json_file)
+    new_data = {
         "user_question": user_question,
         "response": response["output_text"],
     }
+    existing_data.update(new_data)
     with open("user_question_response.json", "w") as json_file:
-        json.dump(data, json_file)
+        json.dump(existing_data, json_file)
 
     # Save user question and response in text format
     with open("user_question_response.txt", "a") as txt_file:
@@ -1007,8 +1011,7 @@ def main():
                 # ratings = st_text_rater(text=st.markdown(response))
                 st.write_stream(response_generator(response))
             handle_user_input_and_ai_response(user_question, response)
-
-
+            
             ########################## function to download_json data####################
             json_data = extract_json_table(response)
             if json_data:
@@ -1036,6 +1039,7 @@ def main():
                 st.form_submit_button(
                     "Save feedback", on_click=handle_feedback
                 )
+
             add_message_to_chat(
                 st.session_state.chat_id, user_question, "user"
             )

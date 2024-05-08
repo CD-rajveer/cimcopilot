@@ -12,6 +12,8 @@ from streamlit_feedback import streamlit_feedback
 import logging
 # import speech_recognition as sr
 import tempfile
+import sqlite3
+
 
 
 

@@ -1030,7 +1030,7 @@ def main():
                 # print(table_data)
                 st.write(response)
                 # ratings = st_text_rater(text=st.markdown(response))
-                st.write_stream(response_generator(response))
+                # st.write_stream(response_generator(response))
             # handle_user_input_and_ai_response(user_question, response)
             
             ########################## function to download_json data####################

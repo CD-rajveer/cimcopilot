@@ -769,7 +769,7 @@ def handle_feedback():
 
 def create_database():
     os.makedirs("database", exist_ok=True)
-    conn = sqlite3.connect('database/feedback.db')
+    conn = sqlite3.connect('database/user/user.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS feedback
                  (id INTEGER PRIMARY KEY AUTOINCREMENT, question TEXT, response TEXT, feedback TEXT)''')
@@ -778,7 +778,7 @@ def create_database():
 
 # Function to insert data into the database
 def insert_feedback(question, response, feedback):
-    conn = sqlite3.connect('database/feedback.db')
+    conn = sqlite3.connect('database/user/user.db')'
     c = conn.cursor()
     c.execute("INSERT INTO feedback (question, response, feedback) VALUES (?, ?, ?)",
               (question, response, feedback))

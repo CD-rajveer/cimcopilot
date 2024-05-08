@@ -1054,16 +1054,16 @@ def main():
             insert_feedback(user_question, response, feedback)
 
 
-            with st.form("form"):
-                streamlit_feedback(
-                    feedback_type="thumbs",
-                    optional_text_label="Enter your feedback here",
-                    align="flex-start",
-                    key="fb_k",
-                )
-                st.form_submit_button(
-                    "Save feedback", on_click=handle_feedback
-                )
+            # with st.form("form"):
+            #     streamlit_feedback(
+            #         feedback_type="thumbs",
+            #         optional_text_label="Enter your feedback here",
+            #         align="flex-start",
+            #         key="fb_k",
+            #     )
+            #     st.form_submit_button(
+            #         "Save feedback", on_click=handle_feedback
+            #     )
 
             add_message_to_chat(
                 st.session_state.chat_id, user_question, "user"

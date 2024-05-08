@@ -767,6 +767,25 @@ def handle_feedback():
     st.toast("✔️ Feedback received!")
 
 
+def create_database():
+    os.makedirs("database", exist_ok=True)
+    conn = sqlite3.connect('database/feedback.db')
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS feedback
+                 (id INTEGER PRIMARY KEY AUTOINCREMENT, question TEXT, response TEXT, feedback TEXT)''')
+    conn.commit()
+    conn.close()
+
+# Function to insert data into the database
+def insert_feedback(question, response, feedback):
+    conn = sqlite3.connect('database/feedback.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO feedback (question, response, feedback) VALUES (?, ?, ?)",
+              (question, response, feedback))
+    conn.commit()
+    conn.close()
+    
+
 def main():
     st.set_page_config("CIMCOPILOT")
     st.header("CIMCOPILOT")
@@ -1028,6 +1047,10 @@ def main():
             # json_str = json.dumps(json_data[config_type], indent=2)
 
             # if config_type:
+            feedback = st.text_input("Add feedback here")
+            create_database() 
+            insert_feedback(user_question, response, feedback)
+
 
             with st.form("form"):
                 streamlit_feedback(

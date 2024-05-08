@@ -1028,10 +1028,10 @@ def main():
             with st.chat_message("assistant"):
                 # table_data = parse_table_from_response(response=response)
                 # print(table_data)
-                # st.write(response)
+                st.write(response)
                 # ratings = st_text_rater(text=st.markdown(response))
                 st.write_stream(response_generator(response))
-            handle_user_input_and_ai_response(user_question, response)
+            # handle_user_input_and_ai_response(user_question, response)
             
             ########################## function to download_json data####################
             json_data = extract_json_table(response)

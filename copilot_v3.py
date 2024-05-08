@@ -379,11 +379,11 @@ def user_input(user_question):
         "response": response["output_text"],
     }
     existing_data.update(new_data)
-    with open("user_question_response.json", "w") as json_file:
+    with open("./user_question_response.json", "w") as json_file:
         json.dump(existing_data, json_file)
 
     # Save user question and response in text format
-    with open("user_question_response.txt", "a") as txt_file:
+    with open("./user_question_response.txt", "a") as txt_file:
         txt_file.write(f"User Question: {user_question}\n")
         txt_file.write(f"Response: {response['output_text']}\n")
         txt_file.write("\n")

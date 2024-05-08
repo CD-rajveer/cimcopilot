@@ -778,7 +778,7 @@ def create_database():
 
 # Function to insert data into the database
 def insert_feedback(question, response, feedback):
-    conn = sqlite3.connect('database/user/user.db')'
+    conn = sqlite3.connect('database/user/user.db')
     c = conn.cursor()
     c.execute("INSERT INTO feedback (question, response, feedback) VALUES (?, ?, ?)",
               (question, response, feedback))

@@ -15,6 +15,7 @@ import logging
 import speech_recognition as sr
 import tempfile
 import csv
+from  sessionState import get
 
 
 
@@ -1009,6 +1010,26 @@ def main():
     st.set_page_config("CIMCOPILOT")
     st.header("CIMCOPILOT")
     st.text("Start your chat")
+    cimcopilot = """Hello there! I'm CIMCopilot, your intelligent digital assistant here to make your life easier when setting up your CIM10 IoT Edge gateway. Using cutting-edge AI, ML, and NLP technologies, I'm here to guide you through every step of the process, no matter your technical background.\
+
+        \n**Setup Made Easy:**
+        With my intuitive chat interface, I can understand your questions and provide clear answers. Need help with physical device connections? No problem, I've got you covered. I can even generate and help you download the configuration files you need.\
+
+        \n**Seamless Configuration:**
+        Uploading configurations to your CIM10 devices? Piece of cake! I'll walk you through the process step by step, ensuring everything runs smoothly.\
+
+        \n**Continuous Improvement:**
+        I'm not just a one-time helper. I'm always learning from your interactions to provide even better assistance in the future. Think of me as your personal IoT guru, dedicated to enhancing your experience with the CIM10 gateway.\
+
+        \n**User-Centric Support:**
+        My goal is to minimize downtime and maximize your satisfaction. With CIMCopilot by your side, managing your IoT devices has never been more seamless.\
+        """
+        # with st.chat_message("ai"):
+            # st.markdown(cimcopilot)
+    session_state_1 = get(cimcopilot_message=cimcopilot)
+
+# Display the message
+    st.write(session_state_1.instance.cimcopilot_message)
 
     # memory = ChatMessageHistory()
     memory  = ConversationBufferMemory()
@@ -1133,35 +1154,7 @@ def main():
         )
 
     # Check if the flag file exists
-    flag_file_path = "cimcopilot_flag.txt"
-    if not st.session_state.get(
-        "cimcopilot_flag", False
-    ) and not st.session_state.get("flag_file_created", False):
-        # Display the message
-        cimcopilot = """Hello there! I'm CIMCopilot, your intelligent digital assistant here to make your life easier when setting up your CIM10 IoT Edge gateway. Using cutting-edge AI, ML, and NLP technologies, I'm here to guide you through every step of the process, no matter your technical background.\
-
-        \n**Setup Made Easy:**
-        With my intuitive chat interface, I can understand your questions and provide clear answers. Need help with physical device connections? No problem, I've got you covered. I can even generate and help you download the configuration files you need.\
-
-        \n**Seamless Configuration:**
-        Uploading configurations to your CIM10 devices? Piece of cake! I'll walk you through the process step by step, ensuring everything runs smoothly.\
-
-        \n**Continuous Improvement:**
-        I'm not just a one-time helper. I'm always learning from your interactions to provide even better assistance in the future. Think of me as your personal IoT guru, dedicated to enhancing your experience with the CIM10 gateway.\
-
-        \n**User-Centric Support:**
-        My goal is to minimize downtime and maximize your satisfaction. With CIMCopilot by your side, managing your IoT devices has never been more seamless.\
-        """
-        with st.chat_message("ai"):
-            st.markdown(cimcopilot)
-
-        # Set the flag to True
-        st.session_state.cimcopilot_flag = True
-
-        # Create the flag file
-        with open(flag_file_path, "w") as flag_file:
-            flag_file.write("Flag file created")
-        st.session_state.flag_file_created = True
+    
 
     # """##################################Add Voice InPUT#####################################"""
     # voice_text = ''

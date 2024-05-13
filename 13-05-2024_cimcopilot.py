@@ -521,6 +521,24 @@ def user_input(user_question, chat_history):
     remember the this chat history {chat_history} asked and act accordingly. 
     Use fuzzy matching to correct spelling mistakes in the question and identify similar terms. 
 
+    you need to generate this below yml as json
+ai_config:
+  publisher:
+    destination: []
+    sampling_rate: 60
+    debug: 0
+  aiChannel:
+    - Enable: 1
+      pinno: 1
+      ChannelType: I
+      EnggLowCal: 4
+      EnggHighCal: 20
+      Scalelow: 0
+      Scalehigh: 100
+      Name: add
+      peripheral_id: "1234567891234567899"
+      uuid: "6b46bd14-061d-11ef-b228-60b6e10ad793"
+
     you also need to generate python scipt for the indstrial use cases for automation and iot.
     if the answer cannot be found, respond with a simple statement: "I don't have information about this, 
     Please provide relavent and clear question! "I don't have information about this, Please provide relavent and

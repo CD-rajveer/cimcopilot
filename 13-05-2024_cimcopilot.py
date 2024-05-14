@@ -521,7 +521,7 @@ def user_input(user_question, chat_history):
     remember the this chat history {chat_history} asked and act accordingly. 
     Use fuzzy matching to correct spelling mistakes in the question and identify similar terms. 
 
-    you need to generate this below yml as json
+    you need to generate this below yml as json if asked to generate for AI configuration.
 ai_config:
   publisher:
     destination: []
@@ -538,6 +538,23 @@ ai_config:
       Name: add
       peripheral_id: "1234567891234567899"
       uuid: "6b46bd14-061d-11ef-b228-60b6e10ad793"
+
+      or if asked for digital input generate following as an 
+      <di_config>
+          <publisher>
+            <destination/>
+            <sampling_rate>60 by default</sampling_rate>
+            <debug>0 or 1</debug>
+          </publisher>
+          <DiChannel>
+            <item>
+              <pin_no>1 or 2</pin_no>
+              <pin_name>device name</pin_name>
+              <peripheral_id>123456789123456789(dummy) can be changed</peripheral_id>
+              <uuid>8e37d75f-faf5-11ee-88ce-60b6e10ad793</uuid>
+            </item>
+          </DiChannel>
+    </di_config>
 
     you also need to generate python scipt for the indstrial use cases for automation and iot.
     if the answer cannot be found, respond with a simple statement: "I don't have information about this, 

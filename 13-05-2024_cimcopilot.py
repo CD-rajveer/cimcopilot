@@ -556,6 +556,34 @@ ai_config:
           </DiChannel>
     </di_config>
 
+        generate json for device configuration if requested:
+export_device:
+  device_config:
+    - devicename: test1
+      protocol: modbusrtu
+      address: ""
+  configlist:
+    Test1:
+      version: "1.0.0"
+      publisher:
+        destination: []
+        protocol: modbus-serial
+        sample_rate: 1
+        debug: 0
+      devicename: meter1
+      enable: 0
+      serial_port:
+        device: "/dev/ttyMAX0"
+        baud_rate: 9600
+        parity: "N"
+        data_bits: 8
+        stop_bits: 1
+        xon_off: 0
+        port_timeout: 3000
+      query: []
+
+      generate json for device configuration if asked
+
     you also need to generate python scipt for the indstrial use cases for automation and iot.
     if the answer cannot be found, respond with a simple statement: "I don't have information about this, 
     Please provide relavent and clear question! "I don't have information about this, Please provide relavent and

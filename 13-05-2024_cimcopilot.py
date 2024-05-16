@@ -1270,14 +1270,16 @@ def main():
             # user_input(user_question)
             st.session_state.messages.append(
                 {"role": "user", "content": user_question}
+
+            )
+            st.session_state.messages.append(
+                {"role": "assistant", "content": response}
             )
             # st.write(f"User: {user_question}")
             with st.chat_message("user"):
                 st.markdown(user_question)
 
-            st.session_state.messages.append(
-                {"role": "assistant", "content": response}
-            )
+            
             with st.chat_message("assistant"):
                 # st.write(response)
                 # ratings = st_text_rater(text=st.markdown(response))

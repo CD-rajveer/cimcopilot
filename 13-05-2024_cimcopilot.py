@@ -1148,30 +1148,30 @@ def main():
         past_chats: dict = joblib.load("data/past_chats_list")
     except:
         past_chats = {}
-    # if "chat_history" not in st.session_state:
-    #     st.session_state["chat_history"] = {}
+    if "chat_history" not in st.session_state:
+        st.session_state["chat_history"] = {}
 
-    # def create_new_chat(chat_id):
-    #     st.session_state["chat_history"][chat_id] = []
+    def create_new_chat(chat_id):
+        st.session_state["chat_history"][chat_id] = []
 
-    # def add_message_to_chat(chat_id, message, role):
-    #     if chat_id not in st.session_state["chat_history"]:
-    #         create_new_chat(chat_id)
-    #     st.session_state["chat_history"][chat_id].append(
-    #         {"role": role, "content": message}
-    #     )
+    def add_message_to_chat(chat_id, message, role):
+        if chat_id not in st.session_state["chat_history"]:
+            create_new_chat(chat_id)
+        st.session_state["chat_history"][chat_id].append(
+            {"role": role, "content": message}
+        )
 
-    # if "messages" not in st.session_state:
-    #     st.session_state.messages = []
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
 
-    # for message in st.session_state.messages:
-    #     with st.chat_message(message["role"]):
-    #         st.markdown(message["content"])
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
-    # if "memory" not in st.session_state:
-    #     st.session_state.memory = ConversationBufferMemory(
-    #         memory_key="chat_history"
-    #     )
+    if "memory" not in st.session_state:
+        st.session_state.memory = ConversationBufferMemory(
+            memory_key="chat_history"
+        )
 
     with st.sidebar:
         image = "./images/CIMcopilot Logo-01.png"
@@ -1291,13 +1291,13 @@ def main():
                 # text = get_pdf_text(pdf_link)
                 # get_text_chunks(text)
                 # st.download_button(label="Download Config", data=json_data, file_name='ai_config.json', mime='application/json')
-            # add_message_to_chat(
-            #     st.session_state.chat_id, user_question, "user"
-            # )
-            # # Add assistant response to chat history
-            # add_message_to_chat(
-            #     st.session_state.chat_id, response, "assistant"
-            # )
+            add_message_to_chat(
+                st.session_state.chat_id, user_question, "user"
+            )
+            # Add assistant response to chat history
+            add_message_to_chat(
+                st.session_state.chat_id, response, "assistant"
+            )
             # Add the user's question to the chat history
 
         else:

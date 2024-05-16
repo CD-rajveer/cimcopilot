@@ -1254,7 +1254,7 @@ def main():
                 (result["title"], result["link"])
                 for result in results["organic"]
             ]
-
+            response = None
             pdf_link = None
             for file_name, link in files_and_links:
                 response = f"[{file_name}]({link})"
@@ -1317,13 +1317,13 @@ def main():
                 {"role": "user", "content": user_question}
 
             )
-            st.session_state.messages.append(
-                {"role": "assistant", "content": response}
-            )
+            
             # st.write(f"User: {user_question}")
             with st.chat_message("user"):
                 st.markdown(user_question)
-
+            st.session_state.messages.append(
+                {"role": "assistant", "content": response}
+            )
             
             with st.chat_message("assistant"):
                 # st.write(response)

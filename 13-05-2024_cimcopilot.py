@@ -1291,13 +1291,13 @@ def main():
                 # text = get_pdf_text(pdf_link)
                 # get_text_chunks(text)
                 # st.download_button(label="Download Config", data=json_data, file_name='ai_config.json', mime='application/json')
-            add_message_to_chat(
-                st.session_state.chat_id, user_question, "user"
-            )
-            # Add assistant response to chat history
-            add_message_to_chat(
-                st.session_state.chat_id, response, "assistant"
-            )
+            # add_message_to_chat(
+            #     st.session_state.chat_id, user_question, "user"
+            # )
+            # # Add assistant response to chat history
+            # add_message_to_chat(
+            #     st.session_state.chat_id, response, "assistant"
+            # )
             # Add the user's question to the chat history
 
         else:

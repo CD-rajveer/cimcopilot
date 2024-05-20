@@ -88,7 +88,7 @@ import streamlit as st
 DATABASE_FILE = "database/users/user.db"
 
 
-def create_database():
+def create_database_user():
     # Create directory if it doesn't exist
     os.makedirs("database/users", exist_ok=True)
 
@@ -1406,7 +1406,7 @@ def show_logout_page():
 
 
 def show_signup_page():
-    create_database()
+    create_database_user()
     st.header("Sign Up")
     name = st.text_input("Name")
     mobile_number = st.text_input("Mobile Number")

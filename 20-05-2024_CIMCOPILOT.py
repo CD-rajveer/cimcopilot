@@ -1274,14 +1274,14 @@ def show_cimcopilot_page():
             response = user_input(user_question, st.session_state.chat_history)
             # response = user_input(user_question)
             message = {"human": user_question, "ai": response}
-            print("Before appending:", st.session_state.chat_history)
+            # print("Before appending:", st.session_state.chat_history)
             if not isinstance(st.session_state.chat_history, list):
                 st.session_state.chat_history = []
-            else:
-                print(
-                    "chat_history is not a list:",
-                    st.session_state.chat_history,
-                )
+            # else:
+            #     print(
+            #         "chat_history is not a list:",
+            #         st.session_state.chat_history,
+            #     )
             # st.session_state.chat_history.append(message)
             st.session_state.chat_history.append(message)
 

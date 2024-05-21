@@ -612,7 +612,7 @@ export_device:
     model = ChatGoogleGenerativeAI(
         model="gemini-1.5-pro-latest",
         temperature=0.2,
-        max_output_tokens=2048,
+        max_output_tokens=8192,
         verbose=True,
         google_api_key=google_api_key,
         convert_system_message_to_human=True,

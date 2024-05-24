@@ -691,7 +691,6 @@ export_device:
         #                           HarmCategory.HARM_CATEGORY_VIOLENCE:HarmBlockThreshold.BLOCK_NONE
         # }
     )
-    # logging.info("Initialized Google generative AI model.")
 
     qa_prompt = ChatPromptTemplate.from_messages(
         [
@@ -703,15 +702,12 @@ export_device:
             ("human", "{input}"),
         ]
     )
-    # logging.info("Prepared QA prompt.")
 
     question_answer_chain = create_stuff_documents_chain(model, qa_prompt)
-    # logging.info("Created question-answer chain.")
 
     rag_chain = create_retrieval_chain(
         history_aware_retriever, question_answer_chain
     )
-    # logging.info("Created retrieval chain.")
 
     def get_session_history(session_id: str) -> BaseChatMessageHistory:
         if session_id not in store:
@@ -727,23 +723,12 @@ export_device:
         history_messages_key="chat_history",
         output_messages_key="answer",
     )
-    # logging.info("Created conversational RAG chain.")
 
     response = conversational_rag_chain.invoke(
         {"input": user_question},
         config={"configurable": {"session_id": id}},
     )
-    # logging.info("Invoked conversational RAG chain.")
 
-    data = {
-        "user_question": user_question,
-        "response": response["answer"],
-    }
-    with open("user_question_response.json", "w") as json_file:
-        json.dump(data, json_file)
-    # logging.info("Saved response to JSON file.")
-    #
-    # Save user question and response in text format
     with open("user_question_response.txt", "a") as txt_file:
         txt_file.write(f"User Question: {user_question}\n")
         txt_file.write(f"Response: {response['answer']}\n")
@@ -1281,11 +1266,11 @@ def show_cimcopilot_page(user_id, session_id):
             # print("Before appending:", st.session_state.chat_history)
             if not isinstance(st.session_state.chat_history, list):
                 st.session_state.chat_history = []
-            else:
-                print(
-                    "chat_history is not a list:",
-                    st.session_state.chat_history,
-                )
+            # else:
+                # print(
+                #     "chat_history is not a list:",
+                #     st.session_state.chat_history,
+                # )
             # st.session_state.chat_history.append(message)
             st.session_state.chat_history.append(message)
 

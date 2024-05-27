@@ -1033,105 +1033,348 @@ def insert_feedback(question, response, feedback):
     conn.close()
 
 
+# def show_cimcopilot_page(user_id, session_id):
+#     st.header("CIMCOPILOT")
+#     cimcopilot = """Hello there! I'm CIMCopilot, your intelligent digital assistant here to make your life easier when setting up your CIM10 IoT Edge gateway. Using cutting-edge AI, ML, and NLP technologies, I'm here to guide you through every step of the process, no matter your technical background.\
+
+#         \n**Setup Made Easy:**
+#         With my intuitive chat interface, I can understand your questions and provide clear answers. Need help with physical device connections? No problem, I've got you covered. I can even generate and help you download the configuration files you need.\
+
+#         \n**Seamless Configuration:**
+#         Uploading configurations to your CIM10 devices? Piece of cake! I'll walk you through the process step by step, ensuring everything runs smoothly.\
+
+#         \n**Continuous Improvement:**
+#         I'm not just a one-time helper. I'm always learning from your interactions to provide even better assistance in the future. Think of me as your personal IoT guru, dedicated to enhancing your experience with the CIM10 gateway.\
+
+#         \n**User-Centric Support:**
+#         My goal is to minimize downtime and maximize your satisfaction. With CIMCopilot by your side, managing your IoT devices has never been more seamless.\
+#         """
+#         # with st.chat_message("ai"):
+#             # st.markdown(cimcopilot)
+#     session_state_1 = get(cimcopilot_message=cimcopilot)
+
+# # Display the message
+#     st.write(session_state_1.instance.cimcopilot_message)
+    
+#     db = create_connection()
+
+#     # memory = ChatMessageHistory()
+#     memory = ConversationBufferMemory()
+
+#     # Folder path where PDF and DOC files are stored
+#     folder_path = "./CIMdata"
+
+#     # Fetch PDF and DOC files from the folder
+#     pdf_files, doc_files = fetch_files_from_folder(folder_path)
+
+#     # Function to extract text from PDF files
+#     pdf_texts = []
+#     for pdf_file in pdf_files:
+#         pdf_texts.append(get_pdf_text([pdf_file]))
+
+#     # Get text chunks
+#     text_chunks = get_text_chunks(" ".join(pdf_texts))
+
+#     get_vector_store(text_chunks)
+
+#     if "chat_history" not in st.session_state:
+#         st.session_state.chat_history = []
+#     else:
+#         for message in st.session_state.chat_history:
+#             memory.save_context(
+#                 {"input": message["human"]}, {"output": message["ai"]}
+#             )
+
+#     # if "messages" not in st.session_state:
+#     #     st.session_state.messages = []
+
+#     # Display chat messages from history on app rerun
+#     # for message in st.session_state.messages:
+#     #     with st.chat_message(message["role"]):
+#     #         st.markdown(message["content"])
+
+#     # new_chat_id = f'{time.time()}'
+#     # MODEL_ROLE = "ai"
+#     # AI_AVATAR_ICON = "✨"
+
+#     # current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+#     # new_chat_id = f"{current_time}"
+
+#     # try:
+#     #     past_chats: dict = joblib.load("data/past_chats_list")
+#     # except:
+#     #     past_chats = {}
+#     # if "chat_history" not in st.session_state:
+#     #     st.session_state["chat_history"] = {}
+
+#     # def create_new_chat(chat_id):
+#     #     st.session_state["chat_history"][chat_id] = []
+
+#     # def add_message_to_chat(chat_id, message, role):
+#     #     if chat_id not in st.session_state["chat_history"]:
+#     #         create_new_chat(chat_id)
+#     #     st.session_state["chat_history"][chat_id].append(
+#     #         {"role": role, "content": message}
+#     #     )
+
+#     # if "messages" not in st.session_state:
+#     #     st.session_state.messages = []
+
+#     # for message in st.session_state.messages:
+#     #     with st.chat_message(message["role"]):
+#     #         st.markdown(message["content"])
+
+#     if "memory" not in st.session_state:
+#         st.session_state.memory = ConversationBufferMemory(
+#             memory_key="chat_history"
+#         )
+
+#     # if not st.session_state.get("logged_in"):
+#     #     st.error("Please log in to access this page.")
+#     #     st.stop()
+
+#     with st.sidebar:
+#         image = "./images/CIMcopilot Logo-01.png"
+#         st.image(image, use_column_width=True)
+#         toggle_state = st.toggle("Find datasheet online")
+#         st.title("Upload datasheet")
+
+#         # if st.button("Logout"):
+#         #     st.session_state.logged_in = False
+#         #     st.experimental_rerun()
+#         pdf_docs = st.file_uploader(
+#             "Upload your datasheets and Click on the Submit & Process Button",
+#             accept_multiple_files=True,
+#         )
+#         if st.button("Submit & Process"):
+#             with st.spinner("Processing..."):
+#                 raw_text = get_pdf_text(pdf_docs)
+#                 text_chunks = get_text_chunks(raw_text)
+#                 get_vector_store(text_chunks)
+#                 st.success("Done")
+#         # st.write("# Past Chats")
+#         # if st.session_state.get("chat_id") is None:
+#         #     st.session_state.chat_id = st.selectbox(
+#         #         label="Pick a past chat",
+#         #         options=[new_chat_id] + list(past_chats.keys()),
+#         #         format_func=lambda x: past_chats.get(x, "New Chat"),
+#         #         placeholder="_",
+#         #     )
+#         # else:
+#         #     st.session_state.chat_id = st.selectbox(
+#         #         label="Pick a past chat",
+#         #         options=[new_chat_id, st.session_state.chat_id]
+#         #         + list(past_chats.keys()),
+#         #         index=1,
+#         #         format_func=lambda x: past_chats.get(
+#         #             x,
+#         #             (
+#         #                 "New Chat"
+#         #                 if x != st.session_state.chat_id
+#         #                 else st.session_state.chat_title
+#         #             ),
+#         #         ),
+#         #         placeholder="_",
+#         #     )
+#         # st.session_state.chat_title = f"CIMCopilot-{st.session_state.chat_id}"
+
+#     # """##################################Add Voice InPUT#####################################"""
+#     # voice_text = ''
+#     # if st.button('Record'):
+#     #     with st.spinner(f'Recording..'):
+#     #         voice_text = get_voice_input()
+#     #         print(voice_text)
+#     #     st.success("Recording completed")
+#     # st.text_input("Text Input", value=voice_text)
+#     ###################################################################################
+
+#     user_question = st.chat_input(
+#         "Message CIMCopilot", max_chars=10000, disabled=False
+#     )
+
+#     # if st.button("Start Speech Input", on_click=transcribe_speech()):
+#     #     speech_text = transcribe_speech()
+#     #     if speech_text:
+#     #         user_question = speech_text
+
+#     if user_question:
+#         if toggle_state:
+#             api_key = os.getenv("SERPER_API_KEY")
+#             # api_key = "01003b150933b133d45925dc3c532bef4309c00e"
+#             st.toast("Finding datasheet online!")
+#             search = GoogleSerperAPIWrapper()
+#             results = search.results(user_question)
+#             files_and_links = [
+#                 (result["title"], result["link"])
+#                 for result in results["organic"]
+#             ]
+
+#             pdf_link = None
+#             for file_name, link in files_and_links:
+#                 response = f"[{file_name}]({link})"
+#                 if link.endswith((".pdf", ".docx", ".book")):
+#                     pdf_link = link
+#                     break
+
+#             # user_input(user_question)
+#             st.session_state.messages.append(
+#                 {"role": "user", "content": user_question}
+#             )
+#             # st.write(f"User: {user_question}")
+#             with st.chat_message("user"):
+#                 st.markdown(user_question)
+
+#             st.session_state.messages.append(
+#                 {"role": "assistant", "content": response}
+#             )
+#             with st.chat_message("assistant"):
+#                 with st.status("Downloading data..."):
+#                     st.write("Searching for data...")
+#                     time.sleep(2)
+#                     st.write("Found URL.")
+#                     time.sleep(1)
+#                     st.write("Downloading data...")
+#                     time.sleep(1)
+#                 # st.write(response)
+#                 # ratings = st_text_rater(text=st.markdown(response))
+#                 st.write_stream(
+#                     response_generator(
+#                         "I found below datasheet online on your request"
+#                         + response
+#                     )
+#                 )
+#                 # st.write(response)
+#                 if pdf_link:
+#                     # Display PDF using displayPDF function
+#                     display_parse_storePDF(pdf_link)
+#                 # text = get_pdf_text(pdf_link)
+#                 # get_text_chunks(text)
+#                 # st.download_button(label="Download Config", data=json_data, file_name='ai_config.json', mime='application/json')
+#             # add_message_to_chat(
+#             #     st.session_state.chat_id, user_question, "user"
+#             # )
+#             # # Add assistant response to chat history
+#             # add_message_to_chat(
+#             #     st.session_state.chat_id, response, "assistant"
+#             # )
+
+#         else:
+#             response = user_input(user_question, st.session_state.chat_history)
+#             message = {"human": user_question, "ai": response}
+#             # print("Before appending:", st.session_state.chat_history)
+#             if not isinstance(st.session_state.chat_history, list):
+#                 st.session_state.chat_history = []
+#             # else:
+#                 # print(
+#                 #     "chat_history is not a list:",
+#                 #     st.session_state.chat_history,
+#                 # )
+#             st.session_state.chat_history.append(message)
+
+#             st.session_state.messages.append(
+#                 {"role": "user", "content": user_question}
+#             )
+#             with st.chat_message("user"):
+#                 st.markdown(user_question)
+
+#             st.session_state.messages.append(
+#                 {"role": "assistant", "content": response}
+#             )
+#             with st.chat_message("assistant"):
+#                 # st.write(response_generator(response))
+#                 st.write(response)
+#                 # st.markdown(response)
+#             # with st.expander(label = "chat_history", expanded=False):
+#             #     st.write(st.session_state.chat_history)
+#             #     st.download_button("chat download", json.dumps(st.session_state.chat_history, indent=4), file_name="history.json", mime="application/json")
+
+            
+         
+
+#             ########################## function to download_json data####################
+#             json_data = extract_json_table(response)
+#             if json_data:
+#                 json_str = json.dumps(json_data[0])
+#                 json_obj = json.loads(json_str)
+#                 st.download_button(
+#                     label="Download JSON",
+#                     data=json_obj,
+#                     file_name="ai_config.json",
+#                     mime="application/json",
+#                 )
+
+    
+#             feedback = streamlit_feedback(
+#                 feedback_type="thumbs",
+#                 optional_text_label="[Optional] Please provide an explanation",
+#             )
+#             if feedback:
+#                 st.toast("Feedback saved successfully.")
+#             else:
+#                 st.toast("No feedback received.")
+     
+#             insert_chat_message(db, user_id, session_id, user_question, response, feedback)
+
+
+
+
+            
+
+#     with st.sidebar:
+#         with st.expander(label="chat_history", expanded=False):
+#             # st.write(st.session_state.chat_history)
+#             st.download_button(
+#                 "chat download",
+#                 json.dumps(st.session_state.chat_history, indent=4),
+#                 file_name="history.json",
+#                 mime="application/json",
+#             )
+
 def show_cimcopilot_page(user_id, session_id):
     st.header("CIMCOPILOT")
-    cimcopilot = """Hello there! I'm CIMCopilot, your intelligent digital assistant here to make your life easier when setting up your CIM10 IoT Edge gateway. Using cutting-edge AI, ML, and NLP technologies, I'm here to guide you through every step of the process, no matter your technical background.\
+    cimcopilot = """Hello there! I'm CIMCopilot, your intelligent digital assistant here to make your life easier when setting up your CIM10 IoT Edge gateway. Using cutting-edge AI, ML, and NLP technologies, I'm here to guide you through every step of the process, no matter your technical background.
 
-        \n**Setup Made Easy:**
-        With my intuitive chat interface, I can understand your questions and provide clear answers. Need help with physical device connections? No problem, I've got you covered. I can even generate and help you download the configuration files you need.\
+    **Setup Made Easy:**
+    With my intuitive chat interface, I can understand your questions and provide clear answers. Need help with physical device connections? No problem, I've got you covered. I can even generate and help you download the configuration files you need.
 
-        \n**Seamless Configuration:**
-        Uploading configurations to your CIM10 devices? Piece of cake! I'll walk you through the process step by step, ensuring everything runs smoothly.\
+    **Seamless Configuration:**
+    Uploading configurations to your CIM10 devices? Piece of cake! I'll walk you through the process step by step, ensuring everything runs smoothly.
 
-        \n**Continuous Improvement:**
-        I'm not just a one-time helper. I'm always learning from your interactions to provide even better assistance in the future. Think of me as your personal IoT guru, dedicated to enhancing your experience with the CIM10 gateway.\
+    **Continuous Improvement:**
+    I'm not just a one-time helper. I'm always learning from your interactions to provide even better assistance in the future. Think of me as your personal IoT guru, dedicated to enhancing your experience with the CIM10 gateway.
 
-        \n**User-Centric Support:**
-        My goal is to minimize downtime and maximize your satisfaction. With CIMCopilot by your side, managing your IoT devices has never been more seamless.\
-        """
-        # with st.chat_message("ai"):
-            # st.markdown(cimcopilot)
+    **User-Centric Support:**
+    My goal is to minimize downtime and maximize your satisfaction. With CIMCopilot by your side, managing your IoT devices has never been more seamless.
+    """
+    
     session_state_1 = get(cimcopilot_message=cimcopilot)
-
-# Display the message
     st.write(session_state_1.instance.cimcopilot_message)
     
     db = create_connection()
-
-    # memory = ChatMessageHistory()
+    
     memory = ConversationBufferMemory()
 
-    # Folder path where PDF and DOC files are stored
     folder_path = "./CIMdata"
-
-    # Fetch PDF and DOC files from the folder
     pdf_files, doc_files = fetch_files_from_folder(folder_path)
 
-    # Function to extract text from PDF files
     pdf_texts = []
     for pdf_file in pdf_files:
         pdf_texts.append(get_pdf_text([pdf_file]))
 
-    # Get text chunks
     text_chunks = get_text_chunks(" ".join(pdf_texts))
-
     get_vector_store(text_chunks)
 
     if "chat_history" not in st.session_state:
-        st.session_state.chat_history = []
-    else:
-        for message in st.session_state.chat_history:
-            memory.save_context(
-                {"input": message["human"]}, {"output": message["ai"]}
-            )
+        st.session_state["chat_history"] = []
 
-    # if "messages" not in st.session_state:
-    #     st.session_state.messages = []
+    for message in st.session_state["chat_history"]:
+        memory.save_context({"input": message["human"]}, {"output": message["ai"]})
 
-    # Display chat messages from history on app rerun
-    # for message in st.session_state.messages:
-    #     with st.chat_message(message["role"]):
-    #         st.markdown(message["content"])
-
-    # new_chat_id = f'{time.time()}'
-    # MODEL_ROLE = "ai"
-    # AI_AVATAR_ICON = "✨"
-
-    # current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    # new_chat_id = f"{current_time}"
-
-    # try:
-    #     past_chats: dict = joblib.load("data/past_chats_list")
-    # except:
-    #     past_chats = {}
-    # if "chat_history" not in st.session_state:
-    #     st.session_state["chat_history"] = {}
-
-    # def create_new_chat(chat_id):
-    #     st.session_state["chat_history"][chat_id] = []
-
-    # def add_message_to_chat(chat_id, message, role):
-    #     if chat_id not in st.session_state["chat_history"]:
-    #         create_new_chat(chat_id)
-    #     st.session_state["chat_history"][chat_id].append(
-    #         {"role": role, "content": message}
-    #     )
-
-    # if "messages" not in st.session_state:
-    #     st.session_state.messages = []
-
-    # for message in st.session_state.messages:
-    #     with st.chat_message(message["role"]):
-    #         st.markdown(message["content"])
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
 
     if "memory" not in st.session_state:
-        st.session_state.memory = ConversationBufferMemory(
-            memory_key="chat_history"
-        )
-
-    # if not st.session_state.get("logged_in"):
-    #     st.error("Please log in to access this page.")
-    #     st.stop()
+        st.session_state.memory = ConversationBufferMemory(memory_key="chat_history")
 
     with st.sidebar:
         image = "./images/CIMcopilot Logo-01.png"
@@ -1139,94 +1382,37 @@ def show_cimcopilot_page(user_id, session_id):
         toggle_state = st.toggle("Find datasheet online")
         st.title("Upload datasheet")
 
-        # if st.button("Logout"):
-        #     st.session_state.logged_in = False
-        #     st.experimental_rerun()
-        pdf_docs = st.file_uploader(
-            "Upload your datasheets and Click on the Submit & Process Button",
-            accept_multiple_files=True,
-        )
+        pdf_docs = st.file_uploader("Upload your datasheets and Click on the Submit & Process Button", accept_multiple_files=True)
         if st.button("Submit & Process"):
             with st.spinner("Processing..."):
                 raw_text = get_pdf_text(pdf_docs)
                 text_chunks = get_text_chunks(raw_text)
                 get_vector_store(text_chunks)
                 st.success("Done")
-        # st.write("# Past Chats")
-        # if st.session_state.get("chat_id") is None:
-        #     st.session_state.chat_id = st.selectbox(
-        #         label="Pick a past chat",
-        #         options=[new_chat_id] + list(past_chats.keys()),
-        #         format_func=lambda x: past_chats.get(x, "New Chat"),
-        #         placeholder="_",
-        #     )
-        # else:
-        #     st.session_state.chat_id = st.selectbox(
-        #         label="Pick a past chat",
-        #         options=[new_chat_id, st.session_state.chat_id]
-        #         + list(past_chats.keys()),
-        #         index=1,
-        #         format_func=lambda x: past_chats.get(
-        #             x,
-        #             (
-        #                 "New Chat"
-        #                 if x != st.session_state.chat_id
-        #                 else st.session_state.chat_title
-        #             ),
-        #         ),
-        #         placeholder="_",
-        #     )
-        # st.session_state.chat_title = f"CIMCopilot-{st.session_state.chat_id}"
 
-    # """##################################Add Voice InPUT#####################################"""
-    # voice_text = ''
-    # if st.button('Record'):
-    #     with st.spinner(f'Recording..'):
-    #         voice_text = get_voice_input()
-    #         print(voice_text)
-    #     st.success("Recording completed")
-    # st.text_input("Text Input", value=voice_text)
-    ###################################################################################
-
-    user_question = st.chat_input(
-        "Message CIMCopilot", max_chars=10000, disabled=False
-    )
-
-    # if st.button("Start Speech Input", on_click=transcribe_speech()):
-    #     speech_text = transcribe_speech()
-    #     if speech_text:
-    #         user_question = speech_text
+    user_question = st.chat_input("Message CIMCopilot", max_chars=10000, disabled=False)
 
     if user_question:
         if toggle_state:
             api_key = os.getenv("SERPER_API_KEY")
-            # api_key = "01003b150933b133d45925dc3c532bef4309c00e"
             st.toast("Finding datasheet online!")
             search = GoogleSerperAPIWrapper()
             results = search.results(user_question)
-            files_and_links = [
-                (result["title"], result["link"])
-                for result in results["organic"]
-            ]
+            files_and_links = [(result["title"], result["link"]) for result in results["organic"]]
 
             pdf_link = None
+            response = ""
             for file_name, link in files_and_links:
-                response = f"[{file_name}]({link})"
+                response += f"[{file_name}]({link})\n"
                 if link.endswith((".pdf", ".docx", ".book")):
                     pdf_link = link
                     break
 
-            # user_input(user_question)
-            st.session_state.messages.append(
-                {"role": "user", "content": user_question}
-            )
-            # st.write(f"User: {user_question}")
+            st.session_state.messages.append({"role": "user", "content": user_question})
             with st.chat_message("user"):
                 st.markdown(user_question)
 
-            st.session_state.messages.append(
-                {"role": "assistant", "content": response}
-            )
+            st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 with st.status("Downloading data..."):
                     st.write("Searching for data...")
@@ -1235,63 +1421,23 @@ def show_cimcopilot_page(user_id, session_id):
                     time.sleep(1)
                     st.write("Downloading data...")
                     time.sleep(1)
-                # st.write(response)
-                # ratings = st_text_rater(text=st.markdown(response))
-                st.write_stream(
-                    response_generator(
-                        "I found below datasheet online on your request"
-                        + response
-                    )
-                )
-                # st.write(response)
+                st.write(response)
                 if pdf_link:
-                    # Display PDF using displayPDF function
                     display_parse_storePDF(pdf_link)
-                # text = get_pdf_text(pdf_link)
-                # get_text_chunks(text)
-                # st.download_button(label="Download Config", data=json_data, file_name='ai_config.json', mime='application/json')
-            # add_message_to_chat(
-            #     st.session_state.chat_id, user_question, "user"
-            # )
-            # # Add assistant response to chat history
-            # add_message_to_chat(
-            #     st.session_state.chat_id, response, "assistant"
-            # )
 
         else:
-            response = user_input(user_question, st.session_state.chat_history)
+            response = user_input(user_question, st.session_state["chat_history"])
             message = {"human": user_question, "ai": response}
-            # print("Before appending:", st.session_state.chat_history)
-            if not isinstance(st.session_state.chat_history, list):
-                st.session_state.chat_history = []
-            # else:
-                # print(
-                #     "chat_history is not a list:",
-                #     st.session_state.chat_history,
-                # )
-            st.session_state.chat_history.append(message)
+            st.session_state["chat_history"].append(message)
 
-            st.session_state.messages.append(
-                {"role": "user", "content": user_question}
-            )
+            st.session_state.messages.append({"role": "user", "content": user_question})
             with st.chat_message("user"):
                 st.markdown(user_question)
 
-            st.session_state.messages.append(
-                {"role": "assistant", "content": response}
-            )
+            st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
-                # st.write(response_generator(response))
-                st.write(response)
-                # st.markdown(response)
-            # with st.expander(label = "chat_history", expanded=False):
-            #     st.write(st.session_state.chat_history)
-            #     st.download_button("chat download", json.dumps(st.session_state.chat_history, indent=4), file_name="history.json", mime="application/json")
-
-            
-         
-
-            ########################## function to download_json data####################
+                st.markdown(response)
+                
             json_data = extract_json_table(response)
             if json_data:
                 json_str = json.dumps(json_data[0])
@@ -1303,7 +1449,6 @@ def show_cimcopilot_page(user_id, session_id):
                     mime="application/json",
                 )
 
-    
             feedback = streamlit_feedback(
                 feedback_type="thumbs",
                 optional_text_label="[Optional] Please provide an explanation",
@@ -1312,14 +1457,8 @@ def show_cimcopilot_page(user_id, session_id):
                 st.toast("Feedback saved successfully.")
             else:
                 st.toast("No feedback received.")
-     
-            insert_chat_message(db, user_id, session_id, user_question, response, feedback)
-
-
-
-
             
-
+            insert_chat_message(db, user_id, session_id, user_question, response, feedback)
     with st.sidebar:
         with st.expander(label="chat_history", expanded=False):
             # st.write(st.session_state.chat_history)
@@ -1329,6 +1468,8 @@ def show_cimcopilot_page(user_id, session_id):
                 file_name="history.json",
                 mime="application/json",
             )
+
+
 
 
 def LoggedIn_Clicked(email, password):

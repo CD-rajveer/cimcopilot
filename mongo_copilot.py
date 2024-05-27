@@ -1034,7 +1034,6 @@ def insert_feedback(question, response, feedback):
 
 def show_cimcopilot_page(user_id, session_id):
     st.header("CIMCOPILOT")
-    st.text("Start your chat")
     cimcopilot = """Hello there! I'm CIMCopilot, your intelligent digital assistant here to make your life easier when setting up your CIM10 IoT Edge gateway. Using cutting-edge AI, ML, and NLP technologies, I'm here to guide you through every step of the process, no matter your technical background.\
 
         \n**Setup Made Easy:**
@@ -1392,6 +1391,7 @@ def show_logout_page():
 
 
 def show_signup_page():
+    
     st.header("Sign Up")
     first_name = st.text_input("First Name")
     last_name = st.text_input("last Name")
@@ -1456,6 +1456,9 @@ def main():
             )
             show_login_page()
         else:
+            with st.sidebar:
+                image = "./images/CIMcopilot Logo-01.png"
+                st.image(image, use_column_width=True)
             page = st.sidebar.radio("Navigation", ["Sign Up", "Login"])
             if page == "Sign Up":
                 show_signup_page()

@@ -1094,35 +1094,35 @@ def show_cimcopilot_page(user_id, session_id):
     #         st.markdown(message["content"])
 
     # new_chat_id = f'{time.time()}'
-    MODEL_ROLE = "ai"
-    AI_AVATAR_ICON = "✨"
+    # MODEL_ROLE = "ai"
+    # AI_AVATAR_ICON = "✨"
 
-    current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    new_chat_id = f"{current_time}"
+    # current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    # new_chat_id = f"{current_time}"
 
-    try:
-        past_chats: dict = joblib.load("data/past_chats_list")
-    except:
-        past_chats = {}
-    if "chat_history" not in st.session_state:
-        st.session_state["chat_history"] = {}
+    # try:
+    #     past_chats: dict = joblib.load("data/past_chats_list")
+    # except:
+    #     past_chats = {}
+    # if "chat_history" not in st.session_state:
+    #     st.session_state["chat_history"] = {}
 
-    def create_new_chat(chat_id):
-        st.session_state["chat_history"][chat_id] = []
+    # def create_new_chat(chat_id):
+    #     st.session_state["chat_history"][chat_id] = []
 
-    def add_message_to_chat(chat_id, message, role):
-        if chat_id not in st.session_state["chat_history"]:
-            create_new_chat(chat_id)
-        st.session_state["chat_history"][chat_id].append(
-            {"role": role, "content": message}
-        )
+    # def add_message_to_chat(chat_id, message, role):
+    #     if chat_id not in st.session_state["chat_history"]:
+    #         create_new_chat(chat_id)
+    #     st.session_state["chat_history"][chat_id].append(
+    #         {"role": role, "content": message}
+    #     )
 
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
+    # if "messages" not in st.session_state:
+    #     st.session_state.messages = []
 
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+    # for message in st.session_state.messages:
+    #     with st.chat_message(message["role"]):
+    #         st.markdown(message["content"])
 
     if "memory" not in st.session_state:
         st.session_state.memory = ConversationBufferMemory(
@@ -1152,31 +1152,31 @@ def show_cimcopilot_page(user_id, session_id):
                 text_chunks = get_text_chunks(raw_text)
                 get_vector_store(text_chunks)
                 st.success("Done")
-        st.write("# Past Chats")
-        if st.session_state.get("chat_id") is None:
-            st.session_state.chat_id = st.selectbox(
-                label="Pick a past chat",
-                options=[new_chat_id] + list(past_chats.keys()),
-                format_func=lambda x: past_chats.get(x, "New Chat"),
-                placeholder="_",
-            )
-        else:
-            st.session_state.chat_id = st.selectbox(
-                label="Pick a past chat",
-                options=[new_chat_id, st.session_state.chat_id]
-                + list(past_chats.keys()),
-                index=1,
-                format_func=lambda x: past_chats.get(
-                    x,
-                    (
-                        "New Chat"
-                        if x != st.session_state.chat_id
-                        else st.session_state.chat_title
-                    ),
-                ),
-                placeholder="_",
-            )
-        st.session_state.chat_title = f"CIMCopilot-{st.session_state.chat_id}"
+        # st.write("# Past Chats")
+        # if st.session_state.get("chat_id") is None:
+        #     st.session_state.chat_id = st.selectbox(
+        #         label="Pick a past chat",
+        #         options=[new_chat_id] + list(past_chats.keys()),
+        #         format_func=lambda x: past_chats.get(x, "New Chat"),
+        #         placeholder="_",
+        #     )
+        # else:
+        #     st.session_state.chat_id = st.selectbox(
+        #         label="Pick a past chat",
+        #         options=[new_chat_id, st.session_state.chat_id]
+        #         + list(past_chats.keys()),
+        #         index=1,
+        #         format_func=lambda x: past_chats.get(
+        #             x,
+        #             (
+        #                 "New Chat"
+        #                 if x != st.session_state.chat_id
+        #                 else st.session_state.chat_title
+        #             ),
+        #         ),
+        #         placeholder="_",
+        #     )
+        # st.session_state.chat_title = f"CIMCopilot-{st.session_state.chat_id}"
 
     # """##################################Add Voice InPUT#####################################"""
     # voice_text = ''
@@ -1250,18 +1250,16 @@ def show_cimcopilot_page(user_id, session_id):
                 # text = get_pdf_text(pdf_link)
                 # get_text_chunks(text)
                 # st.download_button(label="Download Config", data=json_data, file_name='ai_config.json', mime='application/json')
-            add_message_to_chat(
-                st.session_state.chat_id, user_question, "user"
-            )
-            # Add assistant response to chat history
-            add_message_to_chat(
-                st.session_state.chat_id, response, "assistant"
-            )
-            # Add the user's question to the chat history
+            # add_message_to_chat(
+            #     st.session_state.chat_id, user_question, "user"
+            # )
+            # # Add assistant response to chat history
+            # add_message_to_chat(
+            #     st.session_state.chat_id, response, "assistant"
+            # )
 
         else:
             response = user_input(user_question, st.session_state.chat_history)
-            # response = user_input(user_question)
             message = {"human": user_question, "ai": response}
             # print("Before appending:", st.session_state.chat_history)
             if not isinstance(st.session_state.chat_history, list):
@@ -1271,7 +1269,6 @@ def show_cimcopilot_page(user_id, session_id):
                 #     "chat_history is not a list:",
                 #     st.session_state.chat_history,
                 # )
-            # st.session_state.chat_history.append(message)
             st.session_state.chat_history.append(message)
 
             st.session_state.messages.append(
@@ -1284,8 +1281,6 @@ def show_cimcopilot_page(user_id, session_id):
                 {"role": "assistant", "content": response}
             )
             with st.chat_message("assistant"):
-                # st.write(response)
-                # ratings = st_text_rater(text=st.markdown(response))
                 # st.write(response_generator(response))
                 st.write(response)
                 # st.markdown(response)
@@ -1293,20 +1288,8 @@ def show_cimcopilot_page(user_id, session_id):
             #     st.write(st.session_state.chat_history)
             #     st.download_button("chat download", json.dumps(st.session_state.chat_history, indent=4), file_name="history.json", mime="application/json")
 
-            # create_feedback()
-            # feedback = streamlit_feedback(
-            #     feedback_type="thumbs",
-            #     optional_text_label="[Optional] Please provide an explanation",
-            # )
-            # # st.write(feedback)
-            # # Check if feedback is provided
-            # if feedback:
-            #     # Append feedback to messages
-            #     st.session_state.messages.append({"role": "user", "content": feedback})
-            #     with st.chat_message("user"):
-            #         st.markdown(f"[Feedback]: {feedback}")
-            # else:
-            #     st.write("No feedback received")
+            
+         
 
             ########################## function to download_json data####################
             json_data = extract_json_table(response)
@@ -1320,10 +1303,7 @@ def show_cimcopilot_page(user_id, session_id):
                     mime="application/json",
                 )
 
-            # config_type = list(json_data.keys())[0] if json_data else None
-            # json_str = json.dumps(json_data[config_type], indent=2)
-
-            # if config_type:
+    
             feedback = streamlit_feedback(
                 feedback_type="thumbs",
                 optional_text_label="[Optional] Please provide an explanation",
@@ -1332,10 +1312,9 @@ def show_cimcopilot_page(user_id, session_id):
                 st.toast("Feedback saved successfully.")
             else:
                 st.toast("No feedback received.")
-            # feedback = st.text_input("Add feedback here")
-            # create_database()
+     
             insert_chat_message(db, user_id, session_id, user_question, response, feedback)
-            # insert_feedback(user_question, response, feedback)
+
 
 
 

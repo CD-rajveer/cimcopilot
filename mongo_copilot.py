@@ -1332,21 +1332,20 @@ def insert_feedback(question, response, feedback):
 
 def show_cimcopilot_page(user_id, session_id):
     st.header("CIMCOPILOT")
-    cimcopilot = """Hello there! I'm CIMCopilot, your intelligent digital assistant here to make your life easier when setting up your CIM10 IoT Edge gateway. Using cutting-edge AI, ML, and NLP technologies, I'm here to guide you through every step of the process, no matter your technical background.
+    cimcopilot = """Hello there! I'm CIMCopilot, your intelligent digital assistant here to make your life easier when setting up your CIM10 IoT Edge gateway. Using cutting-edge AI, ML, and NLP technologies, I'm here to guide you through every step of the process, no matter your technical background.\
 
-    **Setup Made Easy:**
-    With my intuitive chat interface, I can understand your questions and provide clear answers. Need help with physical device connections? No problem, I've got you covered. I can even generate and help you download the configuration files you need.
+        \n**Setup Made Easy:**
+        With my intuitive chat interface, I can understand your questions and provide clear answers. Need help with physical device connections? No problem, I've got you covered. I can even generate and help you download the configuration files you need.\
 
-    **Seamless Configuration:**
-    Uploading configurations to your CIM10 devices? Piece of cake! I'll walk you through the process step by step, ensuring everything runs smoothly.
+        \n**Seamless Configuration:**
+        Uploading configurations to your CIM10 devices? Piece of cake! I'll walk you through the process step by step, ensuring everything runs smoothly.\
 
-    **Continuous Improvement:**
-    I'm not just a one-time helper. I'm always learning from your interactions to provide even better assistance in the future. Think of me as your personal IoT guru, dedicated to enhancing your experience with the CIM10 gateway.
+        \n**Continuous Improvement:**
+        I'm not just a one-time helper. I'm always learning from your interactions to provide even better assistance in the future. Think of me as your personal IoT guru, dedicated to enhancing your experience with the CIM10 gateway.\
 
-    **User-Centric Support:**
-    My goal is to minimize downtime and maximize your satisfaction. With CIMCopilot by your side, managing your IoT devices has never been more seamless.
-    """
-    
+        \n**User-Centric Support:**
+        My goal is to minimize downtime and maximize your satisfaction. With CIMCopilot by your side, managing your IoT devices has never been more seamless.\
+        """
     session_state_1 = get(cimcopilot_message=cimcopilot)
     st.write(session_state_1.instance.cimcopilot_message)
     

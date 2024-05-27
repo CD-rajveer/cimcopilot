@@ -422,7 +422,7 @@ def user_input(user_question, chat_history):
     Do not create wrong question.
     which can be understood without the chat history. Do NOT answer the question, \
     just reformulate it if needed and otherwise return it as is."""
-    logging.info("Prepared contextualize question system prompt.")
+    # logging.info("Prepared contextualize question system prompt.")
 
     load_qa_prompt_template = """
     You are helpful conversational assistant CIMCopilot created by **CIMCON Digital**, dedicated to providing accurate,
@@ -1085,13 +1085,13 @@ def insert_feedback(question, response, feedback):
 #                 {"input": message["human"]}, {"output": message["ai"]}
 #             )
 
-#     # if "messages" not in st.session_state:
-#     #     st.session_state.messages = []
+#     if "messages" not in st.session_state:
+#         st.session_state.messages = []
 
 #     # Display chat messages from history on app rerun
-#     # for message in st.session_state.messages:
-#     #     with st.chat_message(message["role"]):
-#     #         st.markdown(message["content"])
+#     for message in st.session_state.messages:
+#         with st.chat_message(message["role"]):
+#             st.markdown(message["content"])
 
 #     # new_chat_id = f'{time.time()}'
 #     # MODEL_ROLE = "ai"
@@ -1365,12 +1365,36 @@ def show_cimcopilot_page(user_id, session_id):
 
     if "chat_history" not in st.session_state:
         st.session_state["chat_history"] = []
+    
+    if "chat_sessions" not in st.session_state:
+        st.session_state["chat_sessions"] = {}
+
+    if "chat_ids" not in st.session_state:
+        st.session_state["chat_ids"] = []
+
+    if "current_chat_id" not in st.session_state:
+        st.session_state["current_chat_id"] = None
+
+    # Load chat history from current chat session
+    if st.session_state["current_chat_id"]:
+        chat_id = st.session_state["current_chat_id"]
+        if chat_id in st.session_state["chat_sessions"]:
+            chat_history = st.session_state["chat_sessions"][chat_id]
+            for message in chat_history:
+                memory.save_context({"input": message["human"]}, {"output": message["ai"]})
+                with st.chat_message("user"):
+                    st.markdown(message["human"])
+                with st.chat_message("assistant"):
+                    st.markdown(message["ai"])
 
     for message in st.session_state["chat_history"]:
         memory.save_context({"input": message["human"]}, {"output": message["ai"]})
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
     if "memory" not in st.session_state:
         st.session_state.memory = ConversationBufferMemory(memory_key="chat_history")
@@ -1436,6 +1460,11 @@ def show_cimcopilot_page(user_id, session_id):
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
+            for message in st.session_state["chat_history"]:
+                with st.chat_message("user"):
+                    st.markdown(message["human"])
+                with st.chat_message("assistant"):
+                    st.markdown(message["ai"])
                 
             json_data = extract_json_table(response)
             if json_data:
@@ -1459,14 +1488,39 @@ def show_cimcopilot_page(user_id, session_id):
             
             insert_chat_message(db, user_id, session_id, user_question, response, feedback)
     with st.sidebar:
-        with st.expander(label="chat_history", expanded=False):
+        st.text("Download Chat History")
+        # with st.expander(label="chat_history", expanded=False):
             # st.write(st.session_state.chat_history)
-            st.download_button(
+        st.download_button(
                 "chat download",
                 json.dumps(st.session_state.chat_history, indent=4),
                 file_name="history.json",
                 mime="application/json",
             )
+        # Manage multiple chats
+        new_chat = st.button("New Chat")
+        if new_chat:
+            new_chat_id = f"chat_{len(st.session_state['chat_sessions']) + 1}"
+            st.session_state["chat_sessions"][new_chat_id] = []
+            st.session_state["current_chat_id"] = new_chat_id
+            st.session_state["chat_history"] = []
+            st.session_state.messages = []
+
+        selected_chat_id = st.selectbox("Select Chat", list(st.session_state["chat_sessions"].keys()))
+        if selected_chat_id:
+            st.session_state["current_chat_id"] = selected_chat_id
+            st.session_state["chat_history"] = st.session_state["chat_sessions"][selected_chat_id]
+
+        if st.session_state["current_chat_id"]:
+            new_name = st.text_input("Rename Chat", st.session_state["current_chat_id"])
+            if new_name and new_name != st.session_state["current_chat_id"]:
+                st.session_state["chat_sessions"][new_name] = st.session_state["chat_sessions"].pop(st.session_state["current_chat_id"])
+                st.session_state["current_chat_id"] = new_name
+
+    # Save the chat history whenever it changes
+    if st.session_state["current_chat_id"]:
+        st.session_state["chat_sessions"][st.session_state["current_chat_id"]] = st.session_state["chat_history"]
+        
 
 
 

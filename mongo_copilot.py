@@ -163,9 +163,10 @@ def login(email, password):
         if user:
             return True, user_id
         else:
-            return False
+            return False, None
     else:
-        return "Unable to connect to database."
+        return False, None
+
 
 def validate_mobile_number(mobile_number):
     pattern = r"^\d{10}$"
@@ -1352,18 +1353,22 @@ def show_cimcopilot_page(user_id, session_id):
 
 
 def LoggedIn_Clicked(email, password):
-    success, user_id = login(email, password)
-    if success:
-        user_name = get_user_name(user_id)
-        st.session_state["loggedIn"] = True
-        st.session_state["user_id"] = user_id
-        st.session_state["session_id"] = str(uuid.uuid4())
-        user_name = get_user_name(user_id)
-        st.session_state["user_name"] = user_name
-        st.toast("Login successful. Redirecting to CIMCOPILOT")
-    else:
-        st.session_state["loggedIn"] = False
-        st.error("Invalid user name or password")
+    try:
+        success, user_id = login(email, password)
+        if success:
+            user_name = get_user_name(user_id)
+            st.session_state["loggedIn"] = True
+            st.session_state["user_id"] = user_id
+            st.session_state["session_id"] = str(uuid.uuid4())
+            st.session_state["user_name"] = user_name
+            st.toast("Login successful. Redirecting to CIMCOPILOT")
+        else:
+            st.session_state["loggedIn"] = False
+            st.error("Invalid user name or password" if user_id is not None else "Unable to connect to database.")
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        logging.exception("Exception occurred during login")
+
 
 
 def show_login_page():

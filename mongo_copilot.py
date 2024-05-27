@@ -1632,7 +1632,7 @@ def main():
         else:
             with st.sidebar:
                 image = "./images/CIMcopilot Logo-01.png"
-                st.image(image, use_column_width=True)
+                st.image(image)
             page = st.sidebar.radio("Navigation", ["Sign Up", "Login"])
             if page == "Sign Up":
                 show_signup_page()

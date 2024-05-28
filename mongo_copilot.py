@@ -1460,11 +1460,11 @@ def show_cimcopilot_page(user_id, session_id):
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
-            for message in st.session_state["chat_history"]:
-                with st.chat_message("user"):
-                    st.markdown(message["human"])
-                with st.chat_message("assistant"):
-                    st.markdown(message["ai"])
+            # for message in st.session_state["chat_history"]:
+            #     with st.chat_message("user"):
+            #         st.markdown(message["human"])
+            #     with st.chat_message("assistant"):
+            #         st.markdown(message["ai"])
                 
             json_data = extract_json_table(response)
             if json_data:

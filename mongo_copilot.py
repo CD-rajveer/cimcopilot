@@ -492,8 +492,10 @@ export_device:
         xon_off: 0
         port_timeout: 3000
       query: []
-
-      generate below json for MODBUS RTU device configuration with register mapping if asked or asked to generate json for two devices generate different json configuration for both the devices:
+        
+      
+      for if user wants to configure the modbus device, ask questions about device make, model number, slave id and configurable parameters, baudrate, parity, stop bits, databits.
+      if answer is "yes", "yes generate the json"generate below json for MODBUS RTU device configuration with register mapping if asked or asked to generate json for two devices generate different json configuration for both the devices:
 export_device:
   device_config:
     - devicename: MFM376
